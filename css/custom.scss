@@ -1,0 +1,30 @@
+$enable-shadows: true;
+$secondary:#BDBDBF;
+$success:#64758C;
+$warning:#3E3E40;
+$light:#F0F0F2;
+
+
+
+@import"../libs/bootstrap/scss/bootstrap.scss";
+
+.carousel-caption {
+    bottom: 6.25rem;
+}
+#carousel2, #carousel3 {
+    bottom: 9.25rem;
+}
+#carousel4{
+    bottom: 19.25rem;
+}
+.navbar{
+    --bs-navbar-active-color:#BDBDBF;
+    --bs-navbar-hover-color:#BDBDBF;
+}
+.navbar-nav{
+    --bs-nav-link-color:#000000;
+}
+.btn-outline-secondary{
+    --bs-btn-color:#000000;
+    --bs-btn-hover-bg: #bdbdbf61;
+}
