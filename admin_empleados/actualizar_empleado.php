@@ -18,10 +18,8 @@
     $conexion = new Conexion();
     $con = $conexion->conectarDB();
     $id = $_GET['id'];
-    $sql = "SELECT e.id_empleado, e.nombre_empleado, e.apellido_empleado, e.telefono, e.documento, e.correo, e.sueldo, c.cargo_empleado, t.jornada, t.entrada, t.salida
-    FROM empleado e JOIN cargo_empleado c
-    ON e.id_cargo_empleado = c.id_cargo_empleado
-    JOIN turnos_empleados t
+    $sql = "SELECT * FROM empleado e 
+    JOIN turnos_empleados  t
     ON e.id_turno_empleados = t.id_turno_empleados
     WHERE id_empleado=$id";
 
@@ -70,7 +68,7 @@
                     <h3 class="text-center">Actualización Datos de Empleados</h3>
                     <hr>
                     <?php 
-                    $resulset = $con->query($sql);                                
+                    $resulset = $con->query($sql);                                   
                         while($fila = $resulset->fetch_assoc()){;
                         ?>
                     <form action="update.php" method="POST" enctype="multipart/form-data">
@@ -108,7 +106,7 @@
                             </div>                  
                             <div class="col-lg-4">
                                 <div class="form-floating my-3">
-                                    <select class="form-select" id="categoria" name="categoria" aria-label="Default select example" required>
+                                    <select class="form-select" id="cargo" name="cargo" aria-label="Default select example" required>
                                     <option option selected hidden>--Seleccione el cargo del empleado--</option>
                                     <?php     
                                             $con = $conexion->conectarDB();
@@ -123,7 +121,7 @@
                                             $con->close();
                                     ?>
                                     </select>
-                                    <label for="categoria">Cargo Empleado:</label>
+                                    <label for="cargo">Cargo Empleado:</label>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -134,21 +132,35 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-floating my-3">
-                                    <input type="text" id="jornada" name="jornada" class="form-control" placeholder="Horario Empleado" value="<?php echo $fila['jornada']; ?>" required>
-                                    <label for="jornada">Jornada Empleado:</label>
+                                    <select class="form-select" id="turno" name="turno" aria-label="Default select example" required>
+                                    <option option selected hidden>--Seleccione el cargo del empleado--</option>
+                                    <?php     
+                                            $con = $conexion->conectarDB();
+                                            $sql = "SELECT * FROM TURNOS_EMPLEADOS";
+                                            $resulset = $con->query($sql);                                        
+                                            while($datos = mysqli_fetch_array($resulset)){
+                                                if($datos["id_turno_empleados"] == $fila["id_turno_empleados"])
+                                                    echo "<option value='".$datos["id_turno_empleados"] ."' selected='selected'>" . $datos["jornada"]. "</option>";
+                                                else
+                                                    echo "<option value='".$datos["id_turno_empleados"] ."'>" . $datos["jornada"]. "</option>";
+                                            }
+                                            $con->close();
+                                    ?>
+                                    </select>
+                                    <label for="turno">Jornada Empleado:</label>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-floating my-3">
-                                    <input type="text" id="jornada" name="jornada" disabled class="form-control" placeholder="Entrada Empleado" value="<?php echo $fila['entrada']; ?>" required>
+                                    <input type="text" id="jornada" name="jornada" disabled class="form-control" placeholder="Entrada Empleado" value="<?php echo $fila['entrada']; ?>">
                                     <label for="jornada">Entrada Empleado:</label>
                                 </div>
                             </div>                          
                             <div class="col-lg-4">
                                 <div class="form-floating my-3">
-                                    <input type="text" id="salida" name="salida" disabled class="form-control" placeholder="Salida Empleado" value="<?php echo $fila['salida']; ?>" required>
+                                    <input type="text" id="salida" name="salida" disabled class="form-control" placeholder="Salida Empleado" value="<?php echo $fila['salida']; ?>">
                                     <label for="salida">Salida Empleado:</label>
-                                </div>
+                                </div>                                                          
                             </div>                                 
                             <?php }?>
                             <div class="text-center my-3">

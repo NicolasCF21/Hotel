@@ -12,9 +12,10 @@
     echo $correo = $_POST['correo'].'<br>';
     echo $cargo = $_POST['cargo'].'<br>';
     echo $sueldo = $_POST['sueldo'].'<br>';
-    echo $horario = $_POST['horario'];
+    echo $turno = $_POST['turno'];
     
-    $sql = "UPDATE empleado SET nombre_empleado='$nombre', apellido_empleado='$apellido', documento='$documento', telefono='$telefono', correo='$correo', id_cargo_empleado='$cargo', sueldo='$sueldo', horario_trabajo='$horario' WHERE id_empleado=$id";
+    $sql = "UPDATE empleado SET nombre_empleado='$nombre', apellido_empleado='$apellido', documento='$documento', telefono='$telefono', 
+    correo='$correo', id_cargo_empleado='$cargo', sueldo='$sueldo', id_turno_empleados='$turno' WHERE id_empleado=$id";
 
     
     if($con->query($sql)===TRUE) {
