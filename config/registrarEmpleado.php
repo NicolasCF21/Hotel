@@ -21,16 +21,32 @@
             return $con;
         }
         function crearTipoS(){        
-            $con=$this->conectarDB();            
-            $sql="INSERT INTO empleado (id_cargo_empleado, id_turno_empleados, nombre_empleado, apellido_empleado, documento, telefono, correo, sueldo)
-            VALUES('".$_POST["cargo"]."', '".$_POST["horario"]."', '".$_POST["nombre"]."', '".$_POST["apellido"]."', '".$_POST["documento"]."', '".$_POST["telefono"]."', '".$_POST["email"]."', '".$_POST["sueldo"]."');";
-            
-            if($con->query($sql)===TRUE){
-                header('Location: ../admin_empleados/registrar_empleado.php?mensaje=correcto');
+            $con=$this->conectarDB();   
+            $nombre=$_POST["nombre"];
+            $apellido=$_POST["apellido"];
+            $documento=$_POST["documento"];
+            $telefono=$_POST["telefono"];
+            $correo=$_POST["correo"];
+            $sueldo=$_POST["sueldo"];
+            $nombre=$_POST["cargo"];
+            $horario=$_POST["horario"];
+            $validar = "SELECT * FROM EMPLEADO WHERE correo='$correo'|| documento='$documento'";
+            $validando=$con->query($validar);
+            if($validando->num_rows>0){
+                header("Location: ../admin_empleados/registrar_empleado.php?mensaje=registrado");
             }else{
-                $con->error;
-                header('Location: ../admin_empleados/registrar_empleado.php?mensaje=error');
+                $sql="INSERT INTO empleado (id_cargo_empleado, id_turno_empleados, nombre_empleado, apellido_empleado, documento, telefono, correo, sueldo)
+                VALUES('$cargo', '$horario', '$nombre', '$apellido', '$documento','$telefono', '$email', '$sueldo');";
+            
+                if($con->query($sql)===TRUE){
+                    header('Location: ../admin_empleados/registrar_empleado.php?mensaje=correcto');
+                }else{
+                    $con->error;
+                    header('Location: ../admin_empleados/registrar_empleado.php?mensaje=error');
+                }
             }
+
+            
             $con->close();
         }
         

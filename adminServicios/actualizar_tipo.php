@@ -79,7 +79,7 @@
                             </div>                        
                         <?php }?>
                         <div class="text-center my-3">
-                            <input class="btn btn-success" type="submit" value="Actualizar"></input>
+                            <input class="btn btn-info" type="submit" value="Actualizar"></input>
                         </div>
                     </form>
                 </div>

@@ -82,7 +82,7 @@
                             <input class="form-control" name="imagen" type="file" id="imagen">
                         </div>
                         <div class="text-center">
-                            <input class="btn btn-success" type="submit" value="Registrar" name="submit">
+                            <input class="btn btn-info" type="submit" value="Registrar" name="submit">
                         </div>
                     </form>
                 </div>

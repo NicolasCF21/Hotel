@@ -14,8 +14,8 @@
     echo $sueldo = $_POST['sueldo'].'<br>';
     echo $turno = $_POST['turno'];
     
-    $sql = "UPDATE empleado SET nombre_empleado='$nombre', apellido_empleado='$apellido', documento='$documento', telefono='$telefono', 
-    correo='$correo', id_cargo_empleado='$cargo', sueldo='$sueldo', id_turno_empleados='$turno' WHERE id_empleado=$id";
+    $sql = "UPDATE EMPLEADO SET nombre_empleado='$nombre', apellido_empleado='$apellido', documento='$documento', telefono='$telefono', 
+    correo='$correo', sueldo='$sueldo' WHERE id_empleado=$id";
 
     
     if($con->query($sql)===TRUE) {

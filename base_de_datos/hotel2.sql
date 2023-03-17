@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-03-2023 a las 03:58:11
+-- Tiempo de generación: 16-03-2023 a las 03:31:38
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 7.3.33
 
@@ -104,7 +104,29 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`id_empleado`, `id_cargo_empleado`, `id_turno_empleados`, `nombre_empleado`, `apellido_empleado`, `documento`, `telefono`, `correo`, `sueldo`) VALUES
-(1, 1, 2, 'David', 'Fernandez', '1002314097', '3112780162', 'david@gmail.com', '1200000');
+(1, 1, 2, 'nicolas', 'fernandez', '$1002314097', '3112052626', 'nicolas@gmail.com', '11111111'),
+(2, 4, 1, '1', '1', 'fgghfhgfh', 'hkjhkjk', 'fdkfsfs', '1200000');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado_habitacion`
+--
+
+CREATE TABLE `estado_habitacion` (
+  `id_estado` int(11) NOT NULL,
+  `estado_habitacion` varchar(25) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `estado_habitacion`
+--
+
+INSERT INTO `estado_habitacion` (`id_estado`, `estado_habitacion`) VALUES
+(1, 'Disponible'),
+(2, 'En uso'),
+(3, 'En limpieza'),
+(4, 'En mantenimiento');
 
 -- --------------------------------------------------------
 
@@ -115,10 +137,10 @@ INSERT INTO `empleado` (`id_empleado`, `id_cargo_empleado`, `id_turno_empleados`
 CREATE TABLE `habitacion` (
   `id_habitacion` int(6) NOT NULL,
   `id_tipo_habitacion` int(11) NOT NULL,
+  `id_estado` int(11) NOT NULL,
   `nombre_habitacion` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `descripcion_habitacion` text COLLATE utf8_spanish_ci NOT NULL,
   `cantidad_personas` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `estado_habitacion` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `precio_habitacion` int(11) NOT NULL,
   `imagen_habitacion` text COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -127,11 +149,11 @@ CREATE TABLE `habitacion` (
 -- Volcado de datos para la tabla `habitacion`
 --
 
-INSERT INTO `habitacion` (`id_habitacion`, `id_tipo_habitacion`, `nombre_habitacion`, `descripcion_habitacion`, `cantidad_personas`, `estado_habitacion`, `precio_habitacion`, `imagen_habitacion`) VALUES
-(1, 1, 'Habitación 101         ', 'Una habitación ideal para quienes viajan solos y que además buscan tener un lugar tranquilo para descansar de sus viajes.En ellas tendrán a su alcance todos los servicios del hotel para una estancia agradable y confortable.              ', '1', 'Disponible', 50000, '../imgHabitaciones/h1.jpg'),
-(2, 2, 'Habitación 102', 'Una de las opciones mas económicas y simples, pero perfecta para la relajación y el descanso. Nuestras habitaciones estándar ofrecen a nuestro huésped una selecta variedad de servicios e inigualable confort. ', '1', 'Disponible', 55000, '../imgHabitaciones/h2.jpg'),
-(3, 3, 'Habitación 103', 'Nuestras habitaciones dobles disponen ya sea de una cama matrimonial o de camas gemelas. Son bastante espaciosas e iluminadas para ofrecerle una vacación de calidad. Esta habitación cuenta con un espacio perfecto para dos personas que busquen comodidad y tranquilidad. ', '2', 'Disponible', 65000, '../imgHabitaciones/h-12.jpg'),
-(4, 4, 'Habitación 104 ', 'La habitación con mas espacio y comodidad, ideal para familias de hasta 5 personas, además cuenta con balcón privado con vista hacia la calle. Amplias y confortables habitaciones totalmente equipadas. Estas cómodas habitaciones familiares te permitirán tener una estancia agradable. ', '5', 'Disponible', 90000, '../imgHabitaciones/h8.jpg');
+INSERT INTO `habitacion` (`id_habitacion`, `id_tipo_habitacion`, `id_estado`, `nombre_habitacion`, `descripcion_habitacion`, `cantidad_personas`, `precio_habitacion`, `imagen_habitacion`) VALUES
+(1, 1, 3, 'Habitación 101       ', 'Una habitación ideal para quienes viajan solos y que además buscan tener un  lugar tranquilo para descansar de sus viajes. En ellas tendrán a su alcance todos los servicios del hotel para una estancia agradable y confortable.  ', '1', 45000, '../imgHabitaciones/h1.jpg'),
+(2, 2, 1, 'Habitación 102', 'Una de las opciones mas económicas y simples, pero perfecta para la relajación y el descanso. Nuestras habitaciones estándar ofrecen a nuestro huésped una selecta variedad de servicios e inigualable confort.', '2', 55000, '../imgHabitaciones/h2.jpg'),
+(3, 3, 1, 'Habitación 103', 'Nuestras habitaciones dobles disponen ya sea de una cama matrimonial o de camas gemelas. Son bastante espaciosas e iluminadas para ofrecerle una vacación de calidad. Esta habitación cuenta con un espacio perfecto para dos personas que busquen comodidad y tranquilidad.', '2', 60000, '../imgHabitaciones/h3.jpg'),
+(4, 4, 1, 'Habitación 104 ', 'La habitación con mas espacio y comodidad, ideal para familias de hasta 5 personas, además cuenta con balcón privado con vista hacia la calle. Amplias y confortables habitaciones totalmente equipadas. Estas cómodas habitaciones familiares te permitirán tener una estancia agradable.', '4', 65000, '../imgHabitaciones/h4.jpg');
 
 -- --------------------------------------------------------
 
@@ -158,30 +180,8 @@ CREATE TABLE `reservacion` (
 --
 
 INSERT INTO `reservacion` (`id_reservacion`, `id_usuario`, `id_habitacion`, `id_servicio`, `fecha_reservacion`, `fecha_ingreso`, `fecha_salida`, `cantidad_personas`, `estado_reservacion`, `forma_pago`, `total_pago`) VALUES
-(1, 1, 1, 1, '2022-12-06 12:18:00', '2022-12-06', '2022-12-08', '2', 'Cancelada', 'En linea-Tarjeta', 160000);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reservas`
---
-
-CREATE TABLE `reservas` (
-  `id_reserva` int(6) NOT NULL,
-  `id_habitacion` int(6) NOT NULL,
-  `id_servicio` int(11) NOT NULL,
-  `nombres` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `apellidos` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `documento` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `telefono` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `correo` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `fecha_reg` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `fecha_ingreso` date NOT NULL,
-  `fecha_salida` date NOT NULL,
-  `cant_personas` int(6) NOT NULL,
-  `total_pago` decimal(8,3) NOT NULL,
-  `estado_reservacion` varchar(25) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+(1, 1, 1, 1, '2022-12-06 12:18:00', '2022-12-06', '2022-12-08', '2', 'Cancelada', 'En linea-Tarjeta', 160000),
+(2, 1, 1, 3, '2023-03-11 00:38:14', '2023-03-10', '2023-03-11', '1', 'Confirmada', 'En linea-Tarjeta', 50000);
 
 -- --------------------------------------------------------
 
@@ -203,7 +203,7 @@ CREATE TABLE `servicio` (
 --
 
 INSERT INTO `servicio` (`id_servicio`, `id_categoria_servicio`, `nombre_servicio`, `descripcion_servicio`, `tarifa_servicio`, `imagen_servicio`) VALUES
-(1, 1, 'Desayuno             ', 'Inicie el día de la mejor manera despertando tus sentidos con un completo desayuno, ofrecemos desde frutas típicas hasta platos calientes que garantizan opciones para todos los gustos    ', 15000, '../imgServicios/r1.jpg'),
+(1, 1, 'Desayuno               ', 'Inicie el día de la mejor manera despertando tus sentidos con un completo desayuno, ofrecemos desde frutas típicas hasta platos calientes que garantizan opciones para todos los gustos.', 15000, '../imgServicios/r1.jpg'),
 (2, 1, 'Almuerzo    ', 'Nuestros Restaurantes asociados son los lugares ideales para compartir y degustar la mejor experiencia culinaria.  Disfruta junto a tu familia o amigos de sus excelentes cartas con los mejores platos de la gastronomía local', 25000, '../imgServicios/r2.jpg'),
 (3, 2, 'Parqueadero          ', 'El hotel cuenta con parqueadero interno privado, el cual te permitirá guardar tu auto de forma segura.  Este servicio esta sujeto a disponibilidad  ', 0, '../imgServicios/S3.jpg'),
 (4, 3, 'Bar    ', 'Un rincón con un ambiente íntimo y acogedor ideal para encuentros privados, reuniones sociales o simplemente para relajarse tomando su bebida preferida. El lugar perfecto para disfrutar de momentos agradables, un trago de negocios o una cita romántica. ', 0, '../imgServicios/b3.jpg');
@@ -273,14 +273,22 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `documento`, `telefono`, `email`, `password`, `fecha_reg`) VALUES
-(1, 'Juan Pablo', 'Pérez Piñeros', '94967236', '3204567907', 'Juan@gmail.com', 'HwnctaM=', '2022-12-06 01:42:30'),
+(1, 'Juan Pablo', 'Pérez Piñeros', '94967236', '3204567907', 'Juan@gmail.com', 'HwnctaM=', '2023-03-03 00:27:25'),
 (2, 'Laura', 'Rodriguez', '89567230', '3112780162', 'laura@gmail.com', 'Gw/cs6c=', '2022-11-29 23:40:40'),
 (3, 'Pedro', 'Mora', '76825076', '3218905618', 'pedro@gmail.com', 'T16G7uM=', '2022-11-24 01:55:22'),
 (4, 'Camila', 'Fernandez', '1006785373', '3245806754', 'camila@gmail.com', 'W1SG5Pc=', '2022-11-24 01:55:57'),
 (5, 'Nicolas', 'Castañeda', '1002314097', '3112780162', 'nicolascas2102@gmail.com', 'HwnctaM=', '2022-12-05 23:52:34'),
 (6, 'David', 'Fernandez', '1006785373', '3143614897', 'david@gmail.com', 'Gw/cs6c=', '2022-12-05 23:54:30'),
 (7, 'Matias', 'Castañeda', '1006785373', '3217450976', 'matias@gmail.com', 'HwnctQ==', '2022-12-05 23:55:54'),
-(8, 'Sara', 'Lopez', '76825076', '3204567905', 'sara@gmail.com', 'Gw/cs6c=', '2022-12-06 00:36:49');
+(8, 'Sara', 'Lopez', '76825076', '3204567905', 'sara@gmail.com', 'Gw/cs6c=', '2022-12-06 00:36:49'),
+(9, '101', '201', '94967236', '3112780162', 'admin@gmail.com', 'HwnctaM=', '2023-03-13 20:39:58'),
+(10, '', '', '', '', 'nicolascas2102@gmail.com', 'HwnctaM=', '2023-03-13 21:44:16'),
+(11, '122', 'Perez', '1002314097', '3112780162', 'admin@gmail.com', 'Hwnc', '2023-03-13 22:59:46'),
+(12, 'Juan', 'Castañeda', 'Array', 'Array', 'Juan@gmail.com', 'HwnctaM=', '2023-03-14 01:41:59'),
+(13, 'Juan', 'Perez', 'Array', 'Array', 'juan@gmail.com', 'HwnctaM=', '2023-03-14 01:46:30'),
+(14, 'Juan', 'Perez', '94967236', '3112780162', 'juan@gmail.com', 'HwnctaM=', '2023-03-14 01:59:10'),
+(15, 'Juan', 'Perez', '94967236', '3112780162', 'juan@gmail.com', 'HwnctaM=', '2023-03-14 02:07:39'),
+(16, 'Laura', 'Castañeda', '098766656', '3245806754', 'la@gmail.com', 'HwnctQ==', '2023-03-14 20:37:05');
 
 --
 -- Índices para tablas volcadas
@@ -313,11 +321,18 @@ ALTER TABLE `empleado`
   ADD KEY `id_turno_empleados` (`id_turno_empleados`);
 
 --
+-- Indices de la tabla `estado_habitacion`
+--
+ALTER TABLE `estado_habitacion`
+  ADD PRIMARY KEY (`id_estado`);
+
+--
 -- Indices de la tabla `habitacion`
 --
 ALTER TABLE `habitacion`
   ADD PRIMARY KEY (`id_habitacion`),
-  ADD KEY `id_tipo_habitacion` (`id_tipo_habitacion`);
+  ADD KEY `id_tipo_habitacion` (`id_tipo_habitacion`),
+  ADD KEY `id_estado` (`id_estado`);
 
 --
 -- Indices de la tabla `reservacion`
@@ -327,14 +342,6 @@ ALTER TABLE `reservacion`
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_servicio` (`id_servicio`),
   ADD KEY `id_habitacion` (`id_habitacion`) USING BTREE;
-
---
--- Indices de la tabla `reservas`
---
-ALTER TABLE `reservas`
-  ADD PRIMARY KEY (`id_reserva`),
-  ADD KEY `id_habitacion` (`id_habitacion`),
-  ADD KEY `id_servicio` (`id_servicio`);
 
 --
 -- Indices de la tabla `servicio`
@@ -387,7 +394,13 @@ ALTER TABLE `categoria_servicio`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `estado_habitacion`
+--
+ALTER TABLE `estado_habitacion`
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `habitacion`
@@ -399,13 +412,7 @@ ALTER TABLE `habitacion`
 -- AUTO_INCREMENT de la tabla `reservacion`
 --
 ALTER TABLE `reservacion`
-  MODIFY `id_reservacion` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `reservas`
---
-ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reservacion` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
@@ -417,7 +424,7 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `tipo_habitacion`
 --
 ALTER TABLE `tipo_habitacion`
-  MODIFY `id_tipo_habitacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tipo_habitacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `turnos_empleados`
@@ -429,7 +436,7 @@ ALTER TABLE `turnos_empleados`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_usuario` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
@@ -446,7 +453,8 @@ ALTER TABLE `empleado`
 -- Filtros para la tabla `habitacion`
 --
 ALTER TABLE `habitacion`
-  ADD CONSTRAINT `habitacion_ibfk_1` FOREIGN KEY (`id_tipo_habitacion`) REFERENCES `tipo_habitacion` (`id_tipo_habitacion`);
+  ADD CONSTRAINT `habitacion_ibfk_1` FOREIGN KEY (`id_tipo_habitacion`) REFERENCES `tipo_habitacion` (`id_tipo_habitacion`),
+  ADD CONSTRAINT `habitacion_ibfk_2` FOREIGN KEY (`id_estado`) REFERENCES `estado_habitacion` (`id_estado`);
 
 --
 -- Filtros para la tabla `reservacion`

@@ -38,7 +38,7 @@
                             </form>
                         </div>
                         <div class="col-lg-2">
-                            <a class='btn btn-success btn-sm mt-1' href='http://localhost/hotel/adminServicios/registrar.php' type='submit' id='btnActualizar' value='".$fila["id_habitacion"]."'><i class='bi bi-cloud-plus-fill me-2'></i>Añadir Servicio</a>
+                            <a class='btn btn-info btn-sm mt-1' href='http://localhost/hotel/adminServicios/registrar.php' type='submit' id='btnActualizar' value='".$fila["id_habitacion"]."'><i class='bi bi-cloud-plus-fill me-2'></i>Añadir Servicio</a>
                         </div>
                     </div>
                     
@@ -58,8 +58,8 @@
                             if($resultset->num_rows>0){
                                 while($fila = $resultset->fetch_assoc()){
                                     echo "<tr id='tabla' class='articulo'><td>".$fila["id_servicio"]."</td><td>".$fila["nombre_servicio"]."</td><td>".$fila["categoria_servicio"]."</td><td>".$fila["descripcion_servicio"]."</td><td>$".$fila["tarifa_servicio"]."</td><td> <img src='".$fila["imagen_servicio"]."'  class='img-fluid' style='max-width:200px'> </td>
-                                    <td><a class='btn btn-success btn-sm' href='http://localhost/hotel/adminServicios/actualizar.php?id=".$fila['id_servicio']."' type='submit' id='btnActualizar' value='".$fila["id_servicio"]."'><i class='bi bi-cloud-arrow-up-fill'></i> Actualizar</a></td>
-                                    <td><button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_servicio"]."'><i class='bi bi-trash-fill'></i>Eliminar</button></td></tr>";
+                                    <td><a class='btn btn-primary btn-sm' href='http://localhost/hotel/adminServicios/actualizar.php?id=".$fila['id_servicio']."' type='submit' id='btnActualizar' value='".$fila["id_servicio"]."'><i class='bi bi-pencil-square'></i> </a></td>   
+                                    <td><button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_servicio"]."'><i class='bi bi-trash-fill'></i></button></td></tr>";
                                 }
                             }
                             ?>

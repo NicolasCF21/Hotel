@@ -38,7 +38,7 @@
                             </form>
                         </div>
                         <div class="col-lg-2 ">
-                            <a class='btn btn-success btn-sm mt-1' href='http://localhost/hotel/admin_empleados/registrar_turnos.php' type='submit' id='btnActualizar' value='".$fila["id_habitacion"]."'><i class='bi bi-cloud-plus-fill me-2'></i>Añadir Turno</a>
+                            <a class='btn btn-info btn-sm mt-1' href='http://localhost/hotel/admin_empleados/registrar_turnos.php' type='submit' id='btnActualizar' value='".$fila["id_habitacion"]."'><i class='bi bi-cloud-plus-fill me-2'></i>Añadir Turno</a>
                         </div>
                     </div>
                     
@@ -56,10 +56,10 @@
                             if($resultset->num_rows>0){
                                 while($fila = $resultset->fetch_assoc()){
                                     echo "<tr id='tabla' class='articulo'><td>".$fila["id_turno_empleados"]."</td><td>".$fila["jornada"]."</td><td>".$fila["entrada"]."</td><td>".$fila["salida"]."</td>
-                                    <td><a class='btn btn-success btn-sm' href='http://localhost/hotel/admin_empleados/actualizar_turno.php?id=".$fila['id_turno_empleados']."' type='submit' id='btnActualizar' value='".$fila["id_turno_empleados"]."'><i class='bi bi-cloud-arrow-up-fill'></i> </a>
-                                    <button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_turno_empleados"]."'><i class='bi bi-trash-fill'></i>  </button></td>
+                                    <td><a class='btn btn-primary btn-sm' href='http://localhost/hotel/admin_empleados/actualizar_turno.php?id=".$fila['id_turno_empleados']."' type='submit' id='btnActualizar' value='".$fila["id_turno_empleados"]."'><i class='bi bi-pencil-square'></i> </a>
+                                    <button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_turno_empleados"]."'><i class='bi bi-trash-fill'></i> </button></td>
                                     
-                                  </td></tr>";
+                                </tr>";
                                 }
                             }
                             ?>

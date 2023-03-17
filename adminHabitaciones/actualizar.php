@@ -55,7 +55,7 @@
                 <?php
                     if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'error') {
                 ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>¡Error!</strong> Habitación no se pudo actualizar.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-floating my-3">
-                                    <input type="number" id="precio" name="precio" class="form-control" placeholder="Precio Habitacion"value="<?php echo $fila['precio_habitacion']; ?>" required min="1" max="200000">
+                                    <input type="number" id="precio" name="precio" class="form-control" placeholder="Precio Habitacion"value="<?php echo $fila['precio_habitacion']; ?>" required min="1" max="100000">
                                     <label for="precio">Precio Habitacion:</label>
                                 </div>
                             </div>
@@ -117,16 +117,22 @@
                             </div>                        
                             <div class="col-lg-6">
                                 <div class="form-floating my-3">
-                                    <select t id="estado" name="estado" class="form-select" placeholder="Estado Habitacion" aeia-label="Default select example" required>
-                                    <option option selected hidden>--Seleccione el estado de habitación--</option>
-                                    <?php     
-                                        echo "<option value='".$fila["estado_habitacion"]."' selected='selected'></option>";
-                                    ?>
-                                    <option value="Disponible">Disponible</option>
-                                    <option value="Limpieza">Limpieza</option>
-                                    <option value="En uso">En uso</option>
+                                    <select class="form-select" id="estado" name="estado" aria-label="Default select example" required>
+                                        <option option selected hidden>--Seleccione el esstado de la habitación--</option>
+                                        <?php                                            
+                                            $con = $conexion->conectarDB();
+                                            $sql = "SELECT id_estado, estado_habitacion FROM  ESTADO_HABITACION";
+                                            $resulset = $con->query($sql);
+                                            while($datos = mysqli_fetch_array($resulset)){
+                                                if($datos["id_estado"] == $fila["id_estado"])
+                                                    echo "<option value='".$datos["id_estado"] ."' selected='selected'>" . $datos["estado_habitacion"]. "</option>";
+                                                else
+                                                    echo "<option value='".$datos["id_estado"] ."'>" . $datos["estado_habitacion"]. "</option>";
+                                            }
+                                            $con->close();
+                                        ?>
                                     </select>
-                                    <label for="estado">Estado Habitación:</label>                
+                                    <label for="estado">Estado Habitación:</label>
                                 </div>
                             </div>                            
                             <div class="col-lg-6">
@@ -138,7 +144,7 @@
                             </div>                            
                             <?php }?>
                         <div class="text-center my-3">
-                            <input class="btn btn-success" type="submit" value="Actualizar"></input>
+                            <input class="btn btn-info" type="submit" value="Actualizar"></input>
                         </div>
                     </form>
                 </div>

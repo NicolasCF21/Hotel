@@ -38,7 +38,7 @@
                             </form>
                         </div>
                         <div class="col-lg-2">
-                            <a class='btn btn-success' href='http://localhost/hotel/adminServicios/registrar_tipo.php' type='submit' id='btnRegistrar' value='".$fila["id_habitacion"]."'><i class='bi bi-cloud-plus-fill me-2'></i>Añadir Tipo</a>
+                            <a class='btn btn-info btn-sm' href='http://localhost/hotel/adminServicios/registrar_tipo.php' type='submit' id='btnRegistrar' value='".$fila["id_habitacion"]."'><i class='bi bi-cloud-plus-fill me-2'></i>Añadir Tipo</a>
                         </div>
                     </div>                   
                     <?php
@@ -50,13 +50,13 @@
 
                     ?>
                     <table class="table table-hover table-striped text-center table-sm border " id="tabla" >
-                        <tr><th>N°</th><th>Tipo Servicio</th><th></th></tr>
+                        <tr><th>N°</th><th>Tipo Servicio</th><th>Acciones</th></tr>
                         <?php
                             if($resultset->num_rows>0){
                                 while($fila = $resultset->fetch_assoc()){
                                     echo "<tr id='tabla' class='articulo'><td>".$fila["id_categoria_servicio"]."</td><td>".$fila["categoria_servicio"]."</td>
-                                    <td><a class='btn btn-success btn-sm' href='http://localhost/hotel/adminServicios/actualizar_tipo.php?id=".$fila['id_categoria_servicio']."' type='submit' id='btnActualizar' value='".$fila["id_categoria_servicio"]."'><i class='bi bi-cloud-arrow-up-fill me-2'></i>Modificar</a>
-                                    <button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_categoria_servicio"]."'><i class='bi bi-trash-fill me-2'></i>Eliminar</button></td>
+                                    <td><a class='btn btn-primary btn-sm' href='http://localhost/hotel/adminServicios/actualizar_tipo.php?id=".$fila['id_categoria_servicio']."' type='submit' id='btnActualizar' value='".$fila["id_categoria_servicio"]."'><i class='bi bi-cloud-arrow-up-fill'></i></a>
+                                    <button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_categoria_servicio"]."'><i class='bi bi-trash-fill '></i></button></td>
                                     </tr>";
                                 }
                             }

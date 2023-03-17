@@ -13,7 +13,7 @@ function Header()
     // Movernos a la derecha
     $this->Cell(80);
     // Título
-    $this->Cell(40,10,'Factura Reservacion',0,0,'C');
+    $this->Cell(40,10,'Factura Reservación',0,0,'C');
     // Salto de línea
     $this->Ln(10);
 }

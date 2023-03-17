@@ -27,16 +27,30 @@
             $conexion = new Conexion();
             $con = $conexion->conectarDB();
             $limpieza = new Seguridad();
-            $password=$limpieza->encriptarP($_POST["password"]);
-            $sql="INSERT INTO USUARIOS (nombre_usuario, apellido_usuario, email, telefono, documento, password)
-            VALUES('".$_POST["nombre"]."', '".$_POST["apellido"]."', '".$_POST["email"]."', '".$_POST["telefono"]."','".$_POST["documento"]."', '".$password."');";
+            $nombre=$_POST["nombre"];
+            $apellido=$_POST["apellido"];  
             
-            if($con->query($sql)===TRUE){
-                $_SESSION["Status"]="Se ha creado el usuario exitosamente";
-                header('Location: ../user/registro.php');
+            $email=$_POST["email"];  
+            $telefono=$_POST["telefono"];
+            $documento=$_POST["documento"];
+            //Consulta si existen el usuario en la base de datos
+            $validar="SELECT * FROM USUARIOS WHERE email='$email' OR documento='$documento'";
+            $validando=$con->query($validar);    
+            if($validando->num_rows>0){
+                $_SESSION["Resgistrado"]="Esta registrado";
+                header("Location: ../user/registro.php");
             }else{
-                $_SESSION["ErrorDB"]="Error creando el usuario en la base de datos ".$con->error;
-                header('Location: ../user/registro.php');
+                $password=$limpieza->encriptarP($_POST["password"]);
+                $sql="INSERT INTO USUARIOS (nombre_usuario, apellido_usuario, email, telefono, documento, password)
+                VALUES('$nombre', '$apellido', '$email', '$telefono','$documento', '$password');";
+                
+                if($con->query($sql)===TRUE){
+                    $_SESSION["Status"]="Se ha creado el usuario exitosamente";
+                    header('Location: ../user/registro.php');
+                }else{
+                    $_SESSION["ErrorDB"]="Error creando el usuario en la base de datos ".$con->error;
+                    header('Location: ../user/registro.php');
+                }
             }
             $con->close();
         }

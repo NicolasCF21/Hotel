@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="text-center my-3">
-                            <button class="btn btn-success" type="submit">Registar</button>
+                            <button class="btn btn-info" type="submit">Registar</button>
                         </div>
                     </form>
                 </div>

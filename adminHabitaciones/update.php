@@ -37,10 +37,10 @@
             header ("Location: actualizar.php?id=".$id."&error=" . $error . ""); 
         }
         $sql = "UPDATE HABITACION SET nombre_habitacion='$nombre', id_tipo_habitacion='$tipo', descripcion_habitacion='$descripcion', cantidad_personas='$personas',
-        estado_habitacion='$estadoH', precio_habitacion='$precio', imagen_habitacion='$archivo'  WHERE id_habitacion=$id";
+        id_estado='$estadoH', precio_habitacion='$precio', imagen_habitacion='$archivo'  WHERE id_habitacion=$id";
     }else{
         $sql = "UPDATE HABITACION SET nombre_habitacion='$nombre', id_tipo_habitacion='$tipo', descripcion_habitacion='$descripcion', cantidad_personas='$personas',
-        estado_habitacion='$estadoH', precio_habitacion='$precio'  WHERE id_habitacion=$id";
+        id_estado='$estadoH', precio_habitacion='$precio'  WHERE id_habitacion=$id";
     }
 
     if($estado === 0 && $con->query($sql) === TRUE) {

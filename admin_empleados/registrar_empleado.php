@@ -37,8 +37,18 @@
                 <?php
                     if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'error') {
                 ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>¡Error!</strong> Empleado no se pudo registrar.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php
+                    }
+                ?>
+                <?php
+                    if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'registrado') {
+                ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>¡Error!</strong> Empleado ya se encuentra registrado.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <?php
@@ -62,19 +72,19 @@
                             </div>
                             <div class="col-lg-6 col-sm-12">
                                 <div class="form-floating my-3">
-                                    <input type="text" id="documento" name="documento" class="form-control" placeholder="Documento Identificacion" required>
+                                    <input type="text" id="documento" name="documento" class="form-control" maxlength="10" placeholder="Documento Identificacion" required>
                                     <label for="documento">Documento Identificacion:</label>
                                 </div>  
                             </div>
                             <div class="col-lg-6 col-sm-12">
                                 <div class="form-floating my-3">
-                                    <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono Empleado:" required>
+                                    <input type="text" id="telefono" name="telefono" class="form-control" maxlength="10" placeholder="Telefono Empleado:" required>
                                     <label for="telefono">Telefono Empleado:</label>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-12">
                                 <div class="form-floating my-3">
-                                    <input type="text" id="email" name="email" class="form-control" placeholder="Correo Electronico" required>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Correo Electronico" required>
                                     <label for="email">Correo Electronico </label>
                                 </div>
                             </div>
@@ -125,7 +135,7 @@
                             
                         </div>
                         <div class="text-center my-3">
-                            <input class="btn btn-success" type="submit" value="Registrar" name="submit">
+                            <input class="btn btn-info" type="submit" value="Registrar" name="submit">
                         </div>
                     </form>
                 </div>

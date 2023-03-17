@@ -39,7 +39,7 @@
                             </form>
                         </div>
                         <div class="col-lg-2">
-                            <a class='btn btn-success' href='http://localhost/hotel/adminHabitaciones/registrar_tipo.php' type='submit' id='btnActualizar' value='".$fila["id_habitacion"]."'><i class='bi-cloud-plus-fill me-2'></i>Añadir </a>
+                            <a class='btn btn-info' href='http://localhost/hotel/adminHabitaciones/registrar_tipo.php' type='submit' id='btnActualizar' value='".$fila["id_habitacion"]."'><i class='bi-cloud-plus-fill me-2'></i>Añadir </a>
                         </div>
                     </div>
                     <?php
@@ -51,13 +51,13 @@
 
                     ?>
                     <table class="table table-hover table-striped text-center table-sm border" id="tabla" >
-                        <tr><th>N°</th><th>Tipo Habitacion</th><th></th></tr>
+                        <tr><th>N°</th><th>Tipo Habitacion</th><th>Acciones</th></tr>
                         <?php
                             if($resultset->num_rows>0){
                                 while($fila = $resultset->fetch_assoc()){
                                     echo "<tr id='tabla' class='articulo' ><td>".$fila["id_tipo_habitacion"]."</td><td>".$fila["tipo_habitacion"]."</td>
-                                    <td><a class='btn btn-success btn-sm' href='http://localhost/hotel/adminHabitaciones/actualizar_tipo.php?id=".$fila['id_tipo_habitacion']."' type='submit' id='btnActualizar' value='".$fila["id_tipo_habitacion"]."'><i class='bi bi-cloud-arrow-up-fill me-2'></i>Modificar</a>
-                                    <button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_tipo_habitacion"]."'><i class='bi bi-trash-fill me-2'></i>Eliminar</button></td></tr>";
+                                    <td><a class='btn btn-primary btn-sm' href='http://localhost/hotel/adminHabitaciones/actualizar_tipo.php?id=".$fila['id_tipo_habitacion']."' type='submit' id='btnActualizar' value='".$fila["id_tipo_habitacion"]."'><i class='bi bi-cloud-arrow-up-fill'></i></a>
+                                    <button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_tipo_habitacion"]."'><i class='bi bi-trash-fill'></i></button></td></tr>";
                                 }
                             }
                             ?>

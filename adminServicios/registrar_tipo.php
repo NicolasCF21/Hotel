@@ -57,7 +57,7 @@
                             
                         </div>
                         <div class="text-center my-3">
-                            <input class="btn btn-success" type="submit" value="Registrar" name="submit"></input>
+                            <input class="btn btn-info" type="submit" value="Registrar" name="submit"></input>
                         </div>
                     </form>
                 </div>

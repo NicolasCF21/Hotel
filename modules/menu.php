@@ -10,7 +10,7 @@
         <script src="../js/jquery-3.6.1.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-2 border-bottom">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-2 border-bottom sticky-top">
             <div class="container">
                 <a href="http://localhost/hotel/index.php" class="navbar-brand">
                     <img src="http://localhost/hotel/img/Logo1.png" alt="Logo hotel" style="max-width:170px">

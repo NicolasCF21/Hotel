@@ -38,7 +38,7 @@
                             </form>
                         </div>
                         <div class="col-lg-2 ">
-                            <a class='btn btn-success btn-sm mt-1' href='http://localhost/hotel/admin_empleados/registrar_empleado.php' type='submit' id='btnActualizar' value='".$fila["id_habitacion"]."'><i class='bi bi-cloud-plus-fill me-2'></i>Añadir Empleado</a>
+                            <a class='btn btn-info btn-sm mt-1' href='http://localhost/hotel/admin_empleados/registrar_empleado.php' type='submit' id='btnActualizar' value='".$fila["id_habitacion"]."'><i class='bi bi-cloud-plus-fill me-2'></i>Añadir Empleado</a>
                         </div>
                     </div>
                     
@@ -60,10 +60,9 @@
                             if($resultset->num_rows>0){
                                 while($fila = $resultset->fetch_assoc()){
                                     echo "<tr id='tabla' class='articulo'><td>".$fila["id_empleado"]."</td><td>".$fila["nombre_empleado"]."</td><td>".$fila["apellido_empleado"]."</td><td>".$fila["telefono"]."</td><td>".$fila["correo"]."</td><td>".$fila["cargo_empleado"]."</td><td>".$fila["jornada"]."</td>
-                                    <td><a class='btn btn-success btn-sm' href='http://localhost/hotel/admin_empleados/actualizar_empleado.php?id=".$fila['id_empleado']."' type='submit' id='btnActualizar' value='".$fila["id_empleado"]."'><i class='bi bi-cloud-arrow-up-fill'></i> </a>
-                                    <button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_empleado"]."'><i class='bi bi-trash-fill'></i>  </button></td>
-                                    
-                                  </td></tr>";
+                                    <td><a class='btn btn-primary btn-sm' href='http://localhost/hotel/admin_empleados/actualizar_empleado.php?id=".$fila['id_empleado']."' type='submit' id='btnActualizar' value='".$fila["id_empleado"]."'><i class='bi bi-pencil-square'></i> </a>
+                                    <button class='btn btn-danger btn-sm' type='submit' id='btnEliminar' onclick='confirmar(this.value)' value='".$fila["id_empleado"]."'><i class='bi bi-trash-fill'></i>  </button></td>                                    
+                                  </tr>";
                                 }
                             }
                             ?>

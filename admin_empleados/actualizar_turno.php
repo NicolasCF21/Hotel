@@ -50,6 +50,7 @@
                     $id = $_GET['id'];
                     $sql = "SELECT * FROM turnos_empleados WHERE id_turno_empleados=$id";
                     $resulset = $con->query($sql);
+                        echo var_dump($resulset);
                         while($fila = $resulset->fetch_assoc()){;
                 ?>
                     <h3 class="text-center">Actualización turnos de empleados</h3>
@@ -80,7 +81,7 @@
                         }
                         ?>
                         <div class="text-center my-3">
-                            <button class="btn btn-success" type="submit">Actualizar</button>
+                            <button class="btn btn-info" type="submit">Actualizar</button>
                         </div>
                     </form>
                 </div>

@@ -110,7 +110,7 @@
                         
                         <div class="container mt-4">
                             <div class="text-center">
-                                <input class="btn btn-success" type="submit" name="submit"></input>
+                                <input class="btn btn-info" type="submit" name="submit"></input>
                             </div>                            
                         </div>
                         </form>

@@ -13,7 +13,7 @@ function Header()
     // Movernos a la derecha
     $this->Cell(80);
     // Título
-    $this->Cell(40,10,'Factura Reservacion',0,0,'C');
+    $this->Cell(40,10,utf8_decode('Factura Reservación'),0,0,'C');
     // Salto de línea
     $this->Ln(10);
 }
@@ -45,7 +45,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 $pdf->cell(70);
-$pdf->cell(36,10,utf8_decode('Ciudad: Tunja'),0,0,"C");
+$pdf->cell(56,10,utf8_decode('Ciudad: Guateque-Boyáca'),0,0,"C");
 $pdf->Ln(8);
 
 $pdf->cell(70);
@@ -55,7 +55,7 @@ $pdf->cell(50,10,utf8_decode('N° Factura '),1,0,"C");
 $pdf->Ln(8);
 
 $pdf->cell(60);
-$pdf->cell(71,10,utf8_decode('Telefono: 3206482912'),0,0,"C");
+$pdf->cell(70,10,utf8_decode('Telefono: 3206482912'),0,0,"C");
 $pdf->Ln(8);
 
 $pdf->cell(60);

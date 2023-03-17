@@ -44,6 +44,16 @@
                 <?php
                     }
                 ?>
+                <?php
+                    if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'habitacion') {
+                ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>¡Error!</strong> El nombre de la habitación ya esta registrada.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php
+                    }
+                ?>
                     <h3 class="text-center">Registro de Habitaciones</h3>
                     <hr>
                     <form action="../config/registrarHabitacion.php" method="POST" enctype="multipart/form-data">
@@ -69,6 +79,7 @@
                                         <option value="<?php echo $datos["id_tipo_habitacion"]?>"><?php echo $datos["tipo_habitacion"]?></option>
                                         <?php
                                             }
+                                            $con->close();
                                         ?>
                                     </select>
                                     <label for="categoria">Tipo de Habitación:</label>
@@ -76,19 +87,31 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-floating my-3">
-                                    <input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad Personas" required>
+                                    <input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad Personas" required min="1" max="10">
                                     <label for="cantidad">Cantidad Personas:</label>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-floating my-3">
-                                    <input type="text" id="estado" name="estado" class="form-control" placeholder="Estado Habitacion" required>
+                                    <select class="form-select" id="estado" name="estado" aria-label="Default select example" required>
+                                        <option option selected hidden>--Seleccione el esstado de la habitación--</option>
+                                        <?php                                            
+                                            $con = $conexion->conectarDB();
+                                            $sql = "SELECT id_estado, estado_habitacion FROM  ESTADO_HABITACION";
+                                            $resulset = $con->query($sql);
+                                            while($datos = mysqli_fetch_array($resulset)){
+                                        ?>                                                    
+                                        <option value="<?php echo $datos["id_estado"]?>"><?php echo $datos["estado_habitacion"]?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
                                     <label for="estado">Estado Habitación:</label>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-floating my-3">
-                                    <input type="text" id="precio" name="precio" class="form-control" placeholder="Precio Habitacion" required>
+                                    <input type="number" id="precio" name="precio" class="form-control" placeholder="Precio Habitacion" required min="1" max="100000">
                                     <label for="precio">Precio Habitación:</label>
                                 </div>
                             </div>
@@ -109,7 +132,7 @@
                             
                         </div>
                         <div class="text-center my-3">
-                            <input class="btn btn-success" type="submit" value="Registrar" name="submit">
+                            <input class="btn btn-info" type="submit" value="Registrar" name="submit">
                         </div>
                     </form>
                 </div>

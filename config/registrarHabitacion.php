@@ -61,14 +61,22 @@
                     echo "Ha ocurrido un error.";
                 }
             }
-            $sql="INSERT INTO HABITACION (id_tipo_habitacion, nombre_habitacion, descripcion_habitacion, cantidad_personas, estado_habitacion, precio_habitacion, imagen_habitacion)
-            VALUES('".$_POST["categoria"]."','".$_POST["nombre"]."','".$_POST["descripcion"]."','".$_POST["cantidad"]."','".$_POST["estado"]."','".$_POST["precio"]."','".$archivo."');";
+            $nombre=$_POST["nombre"];
+            $validarN= "SELECT * FROM HABITACION WHERE nombre_habitacion='$nombre'";
+            $validando=$con->query($validarN);
+            if($validando->num_rows>0){
+                header('Location: ../adminHabitaciones/registrar.php?mensaje=habitacion');
+            }else{
+                $sql="INSERT INTO HABITACION (id_tipo_habitacion, nombre_habitacion, descripcion_habitacion, cantidad_personas, id_estado, precio_habitacion, imagen_habitacion)
+                VALUES('".$_POST["categoria"]."','$nombre','".$_POST["descripcion"]."','".$_POST["cantidad"]."','".$_POST["estado"]."','".$_POST["precio"]."','".$archivo."');";
             
-            if($con->query($sql)===TRUE){                
-                header('Location: ../adminHabitaciones/registrar.php?mensaje=correcto');
-            }else{            
-                header('Location: ../adminHabitaciones/registrar.php?mensaje=error');
+                if($con->query($sql)===TRUE){                
+                    header('Location: ../adminHabitaciones/registrar.php?mensaje=correcto');
+                }else{            
+                    header('Location: ../adminHabitaciones/registrar.php?mensaje=error');
+                }
             }
+            
             $con->close();
         }
     }
