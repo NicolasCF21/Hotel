@@ -1,0 +1,11 @@
+-Mostrar reservaciones del mes. actual SELECT * FROM reservacion WHERE MONTH(fecha_reservacion)=MONTH(NOW());
+-Mostrar la cantidad de reservaciones en un mes. SELECT COUNT(*) AS cantidad_reservacion FROM reservacion WHERE MONTH(fecha_reservacion) = MONTH(NOW());
+-Mostrar la cantidad de reservaciones hechas en un año SELECT COUNT(*) AS cantidad_reservas FROM reservacion WHERE YEAR(fecha_reservacion) = YEAR(NOW());
+-Mostrar la cantidad de reservaciones hechas en cada mes del año SELECT MONTH(fecha_reservacion) AS mes, COUNT(*) AS cantidad_reservas 
+FROM reservacion 
+WHERE YEAR(fecha_reservacion) = YEAR(NOW())
+GROUP BY MONTH(fecha_reservacion);
+-UPDATE reservacion SET estado_reservacion = 'Finalizada' WHERE fecha_salida <= NOW() AND estado_reservacion <> 'Finalizada';
+-Mostrar las 5 habitaciones mas reservadas SELECT nombre_producto, SUM(cantidad_producto) FROM `productos` GROUP BY nombre_producto
+ORDER BY cantidad_producto DESC 
+LIMIT 5;

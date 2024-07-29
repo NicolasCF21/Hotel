@@ -13166,4 +13166,20 @@ textarea.form-control-lg {
 .btn-outline-secondary {
   --bs-btn-color:#000000;
   --bs-btn-hover-bg: #bdbdbf61;
+}
+
+.hover-in {
+  overflow: hidden;
+}
+
+.hover-in img {
+  -webkit-transition: -webkit-transform 0.6s ease;
+  transition: -webkit-transform 0.6s ease;
+  transition: transform 0.6s ease;
+  transition: transform 0.6s ease, -webkit-transform 0.6s ease;
+}
+
+.hover-in:hover img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }/*# sourceMappingURL=custom.css.map */

@@ -13,7 +13,7 @@ function Header()
     // Movernos a la derecha
     $this->Cell(80);
     // Título
-    $this->Cell(40,10,'Factura Reservación',0,0,'C');
+    $this->Cell(40,10,utf8_decode('Factura Reservación'),0,0,'C');
     // Salto de línea
     $this->Ln(10);
 }
@@ -57,9 +57,10 @@ $pdf->Ln(8);
 $pdf->cell(70);
 $pdf->cell(30,10,utf8_decode('Dirección: '),0,0,"C");
 $pdf->cell(40);
-$pdf->cell(50,10,utf8_decode('N° Factura '),1,0,"C");
+while($fila = $resultset->fetch_assoc()){
+$pdf->cell(50,10,utf8_decode('N° Factura:'.$fila['id_reservacion'].' '),1,0,"C");
 $pdf->Ln(8);
-
+}
 $pdf->cell(60);
 $pdf->cell(71,10,utf8_decode('Telefono: 3206482912'),0,0,"C");
 $pdf->Ln(8);
@@ -110,7 +111,7 @@ $con->close();
 
 $con = $conexion->conectarDB();
 $usuario = $_SESSION['Usuario'];
-$sql = "SELECT r.id_reservacion, r.fecha_ingreso, r.fecha_salida, r.cantidad_personas, r.estado_reservacion, r.total_pago, r.forma_pago, u.nombre_usuario, h.nombre_habitacion, h.precio_habitacion, s.nombre_servicio, s.tarifa_servicio
+$sql = "SELECT r.id_reservacion, r.fecha_ingreso, r.fecha_salida, r.cantidad_personas, r.estado_reservacion, r.total_pago, r.forma_pago, u.nombre_usuario, h.nombre_habitacion, h.precio_Tb, s.nombre_servicio, s.tarifa_servicio
 FROM reservacion r JOIN usuarios u ON r.id_usuario = u.id_usuario
 JOIN habitacion h ON r.id_habitacion = h.id_habitacion
 JOIN servicio s ON r.id_servicio = s.id_servicio
@@ -147,7 +148,7 @@ $pdf->cell(36,10,utf8_decode('Tarifas'),1,0,'C');
 $pdf->Ln(10);
 $pdf->cell(118);
 $pdf->cell(36,10,utf8_decode('Habitación:'),1,0,'C');
-$pdf->cell(36,10,utf8_decode('$ '.$fila['precio_habitacion']),1,0,'C');
+$pdf->cell(36,10,utf8_decode('$ '.$fila['precio_Tb']),1,0,'C');
 $pdf->Ln(10);
 $pdf->cell(118);
 $pdf->cell(36,10,utf8_decode('Servicio:'),1,0,'C');

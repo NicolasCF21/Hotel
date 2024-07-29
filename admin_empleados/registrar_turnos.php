@@ -3,15 +3,19 @@
     if(!isset($_SESSION["Admin"])){
         header('Location: ../admin/login.php');
     }
+    date_default_timezone_set("America/Bogota");
 ?>
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" type="image/png" href="http://localhost/hotel/img/Logo2.png">
         <title>Pagina Hotel</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <link rel="stylesheet" href="../css/custom.css">
         <link rel="stylesheet" href="../libs/bootstrap-icons/bootstrap-icons.css">
+        <script src="../js/jquery-3.6.1.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
@@ -27,22 +31,16 @@
                 <div class="col-xl-10 col-sm-8 col-md-9 py-3">
                 <?php
                     if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'registrado') {
-                ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>¡Correcto!</strong> Turno de empleado registrado.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php
+                        echo '<div class="alert alert-success m-0 alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle-fill"></i><strong> ¡Exito!</strong> El turno fue registrado correctamente
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
                     }
-                ?>
-                <?php
                     if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'error') {
-                ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>¡Error!</strong> Turno de empleado no se pudo registrar.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php
+                        echo '<div class="alert alert-danger m-0 alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-circle-fill"></i><strong> ¡Error!</strong> El turno no ha sido registrado.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
                     }
                 ?>
                     <h3 class="text-center">Registro turnos de empleados</h3>
@@ -74,7 +72,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </body>
-    
+        </div>    
+    </body>    
 </html>

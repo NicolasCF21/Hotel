@@ -27,3 +27,14 @@ $light:#F0F0F2;
     --bs-btn-color:#000000;
     --bs-btn-hover-bg: #bdbdbf61;
 }
+.hover-in {
+    overflow: hidden; 
+}
+.hover-in img {
+    transition: transform .6s ease;
+}
+.hover-in:hover img {
+    transform: scale(1.1);
+}
+
+

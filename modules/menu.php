@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Pagina Hotel</title>
+    <head>        
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">    
         <link rel="stylesheet" href="../css/custom.css">
         <link rel="stylesheet" href="../libs/bootstrap-icons/bootstrap-icons.css">
-        <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/jquery-3.6.1.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>            
     </head>
-    <body>
+    <body style="overflow-x: hidden;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-2 border-bottom sticky-top">
             <div class="container">
                 <a href="http://localhost/hotel/index.php" class="navbar-brand">
@@ -21,23 +19,32 @@
                 <div class="collapse navbar-collapse justify-content-center " id="navbar">
                     <ul class="navbar-nav me-5">
                         <li class="nav-item">
-                            <a class="nav-link active fw-semibold"  href="http://localhost/hotel/index.php">Inicio</a>
+                            <a class="nav-link fw-semibold <?php if (basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>"  href="http://localhost/hotel/index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold" href="http://localhost/hotel/vistas/habitaciones.php">Habitaciones</a>
+                            <a class="nav-link fw-semibold <?php if (basename($_SERVER['PHP_SELF']) == 'habitaciones.php') echo 'active'; ?>" href="http://localhost/hotel/vistas/habitaciones.php">Habitaciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold" href="http://localhost/hotel/vistas/servicios.php">Servicios</a>
+                            <a class="nav-link fw-semibold <?php if (basename($_SERVER['PHP_SELF']) == 'servicios.php') echo 'active'; ?>" href="http://localhost/hotel/vistas/servicios.php">Servicios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold" href="#">Galeria</a>
+                            <a class="nav-link fw-semibold <?php if (basename($_SERVER['PHP_SELF']) == 'reseñas.php') echo 'active'; ?>" href="http://localhost/hotel/vistas/reseñas.php">Reseñas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold" href="#">Contacto</a>
+                            <a class="nav-link fw-semibold <?php if (basename($_SERVER['PHP_SELF']) == 'contacto.php') echo 'active'; ?>" href="http://localhost/hotel/vistas/contacto.php">Contacto</a>
                         </li>
                     </ul>
-                    <div>
-                        <a href="http://localhost/hotel/user/registro.php"><i class="bi bi-person-circle text-black" style="font-size:22px;"></a></i>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light">
+                            <i class="bi bi-person-circle" style="font-size:20px;"></i>
+                        </button>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="http://localhost/hotel/user/login.php">Iniciar Sesión</a></li>
+                            <li><a class="dropdown-item" href="http://localhost/hotel/user/registro.php">Registrarse</a></li>                                                   
+                        </ul>
                     </div>
                 </div>
             </div>

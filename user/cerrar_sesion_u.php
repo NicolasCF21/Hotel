@@ -1,5 +1,8 @@
 <?php
     session_start();
-    session_destroy();
-    header('Location: login.php');
+    if(isset($_SESSION["Usuario"])) {
+        unset($_SESSION["Usuario"]);
+        header('Location: login.php');
+    }
+    
 ?>

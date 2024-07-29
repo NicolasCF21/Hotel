@@ -21,7 +21,7 @@
             if($resulset->num_rows>0){
                 while($fila=$resulset->fetch_assoc()){
                     $_SESSION["Admin"]=$fila["email"];
-                    header('Location:../admin/index.php');
+                    header('Location:../admin/indexA.php');
                 }
             }else{
                 $_SESSION["Error"]="Por favor verifique su credencial de acceso.!";

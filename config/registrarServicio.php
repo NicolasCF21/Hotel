@@ -23,7 +23,7 @@
     
         function crearServicio(){
             $con=$this->conectarDB();
-            $directorio = "../imgHabitaciones/";
+            $directorio = "../imgServicios/";
             $archivo = $directorio . basename($_FILES["imagen"]["name"]);
             $estado = 1;
             $tipoArchivo = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
@@ -39,16 +39,12 @@
             }
             //Verificar el tipo de la imagen
             if ($tipoArchivo != "png" && $tipoArchivo != "jpg" && $tipoArchivo != "jpeg") {
-                echo "Tipo de archivo no permitido";
+                $_SESSION["Errori"]="Error tipo de imagen";
+                header('Location: ../adminServicios/registrar.php');
                 $estado=0;
+                return $con->error;
             }else {
                 echo "El archivo es de tipo:$tipoArchivo";
-            }
-
-            //Verificar el tamaño de la imagen
-            if($_FILES["imagen"]["size"]>1000000){
-                echo "<br>El peso del archivo excede el tamaño permitido";
-                $estado=0;
             }
 
             //Verificar si el archivo es apto para subir
@@ -56,20 +52,25 @@
                 echo "Lo sentimos, su archivo no ha podido subirse";
             }else{
                 if(move_uploaded_file($_FILES["imagen"]["tmp_name"], $archivo)){
-                    echo "<br>El archivo ".basename($_FILES["archivoSubir"]["name"]." ha sido subido exitosamente!");
+                    echo "<br>El archivo ".basename($_FILES["imagen"]["name"]." ha sido subido exitosamente!");
                 }else{
                     echo "Ha ocurrido un error.";
                 }
             }
+            $nombre=$_POST["nombre"];
+            
             $sql="INSERT INTO SERVICIO (id_categoria_servicio, nombre_servicio, descripcion_servicio, tarifa_servicio, imagen_servicio)
-            VALUES('".$_POST["categoria"]."','".$_POST["nombre"]."','".$_POST["descripcion"]."','".$_POST["tarifa"]."','".$archivo."');";
-        
-            if($con->query($sql)===TRUE){                
-                header('Location: ../adminServicios/registrar.php?mensaje=correcto');
+            VALUES('".$_POST["categoria"]."','".$nombre."','".$_POST["descripcion"]."','".$_POST["tarifa"]."','".$archivo."');";
+            
+            if($con->query($sql)===TRUE){             
+                $_SESSION["Registrado"]="El servicio ha sido registrado";   
+                header('Location: ../adminServicios/registrar.php');
             }else{
-                $con->error;
-                header('Location: ../adminServicios/registrar.php?mensaje=error');
+                $_SESSION["Error"]="El servicio no se ha podido registrar";
+                header('Location: ../adminServicios/registrar.php');
             }
+            
+            
             $con->close();
         }
     }

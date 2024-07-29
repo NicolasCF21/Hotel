@@ -76,18 +76,34 @@ function verificarToken($token, $claveSecreta)
     $id = $_POST["id_usuario"];
     $nombre = $_POST['nombres'];
     $apellido =$_POST['apellidos'];
-    $documento = $_POST['documento'];
+    #$documento = $_POST['documento'];
     $telefono = $_POST['telefono'];
     $correo = $_POST['email'];
-    $limpieza = new Seguridad();
-    $password=$limpieza->encriptarP($_POST["password"]);
     
-    $sql = "UPDATE usuarios SET nombre_usuario='$nombre', apellido_usuario='$apellido', documento='$documento', telefono='$telefono', email='$correo', password='$password' WHERE id_usuario=$id";
+    if (!preg_match("/^[a-zA-Zá-úÁ-Ú ñ-Ñ]*$/",$nombre)) {                    
+        #echo"error";
+        $_SESSION["nombre"]="¡Por favor igrese solo letras!";
+        header("Location: ../user/perfil.php?mensaje=nombre");
+    }
+    elseif (!preg_match("/^[a-zA-Zá-úÁ-Ú ñ-Ñ]*$/",$apellido)) {                
+        $_SESSION["apellido"]="Por favor ingrese solo letras";
+        header("Location: ../user/perfil.php?mensaje=apellido");
+    }
+    elseif (!is_numeric($telefono)) {                
+        $_SESSION["telefono"]="Por favor ingrese solo numeros";
+        header("Location: ../user/perfil.php?mensaje=telefono");
+    }
+    elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION["correo"]="Ingrese un correo valido";
+        header("Location: ../user/perfil.php?mensaje=correo");
+    }else{
+        $sql = "UPDATE usuarios SET nombre_usuario='$nombre', apellido_usuario='$apellido', telefono='$telefono', email='$correo' WHERE id_usuario=$id";
 
     
-    if($con->query($sql)===TRUE) {
-        header ("Location: perfil.php?mensaje=correcto"); 
-    }else{
-        header ("Location: perfil.php?mensaje=error"); 
+        if($con->query($sql)===TRUE) {
+            header ("Location: perfil.php?mensaje=correcto"); 
+        }else{
+            header ("Location: perfil.php?mensaje=error"); 
+        }
     }
 ?>

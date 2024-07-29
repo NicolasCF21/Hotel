@@ -4,16 +4,7 @@
     if(!isset($_SESSION["Admin"])){ 
         header('Location: ../admin/login.php');
     }
-
-    if(isset($_GET['error'])){
-        echo '<div class="alert alert-danger m-0 alert-dismissible fade show" role="alert">
-        <strong>ERROR</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-        echo $_GET['error'];
-        echo '</div>';
-        
-    }
-
+       
     include '../controller/conexion.php';
     $conexion = new Conexion();
     $con = $conexion->conectarDB();
@@ -24,11 +15,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" type="image/png" href="http://localhost/hotel/img/Logo2.png">
         <title>Pagina Hotel</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <link rel="stylesheet" href="../css/custom.css">
         <link rel="stylesheet" href="../libs/bootstrap-icons/bootstrap-icons.css">
+        <script src="../js/jquery-3.6.1.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
@@ -43,23 +37,19 @@
                 <div class="col-xl-10 col-sm-8 col-md-9 py-3">
                 <?php
                     if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'correcto') {
-                ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>¡Correcto!</strong> Servicio actualizado correctamente.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php
+                        echo '<div class="alert alert-success m-0 alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle-fill"></i><strong> ¡Exito!</strong> El servicio fue actualizada correctamente
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
                     }
-                ?>
-                <?php
+
                     if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'error') {
-                ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>¡Error!</strong> Servicio no se ha podido actualizar.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php
+                        echo '<div class="alert alert-danger m-0 alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-circle-fill"></i><strong> ¡Error!</strong> El servicio no ha sido actualizado.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>'; 
                     }
+
                 ?>
                     <h3 class="text-center">Actualización de Servicios</h3>
                     <hr>
@@ -81,7 +71,7 @@
                                     <option option selected hidden>--Elija el tipo de servicio--</option>
                                     <?php     
                                             $con2 = $conexion->conectarDB();
-                                            $sql = "SELECT id_categoria_servicio, categoria_servicio FROM  CATEGORIA_SERVICIO";
+                                            $sql = "SELECT id_categoria_servicio, categoria_servicio FROM  CATEGORIA_SERVICIO WHERE categoria_servicio!='Sin servicio'";
                                             $resulset = $con2->query($sql);
                                             while($datos = mysqli_fetch_array($resulset)){
                                                 if($datos["id_categoria_servicio"] == $fila["id_categoria_servicio"])
@@ -112,12 +102,29 @@
                                 echo '<img src="'.$fila["imagen_servicio"].'" class="img-fluid" style="max-width:350px">';
                                 ?>
                                 <input class="form-control mt-3" name="imagen" type="file" id="imagen">
+                                <?php } ?>
+                            </div>
+                            <div class="col-lg-6">
+                            <?php 
+                                if(isset($_GET['error'])){
+                                    echo '<div class="toast-container position-static">
+                                            <div class="toast align-items-center mt-2" role="alert" aria-live="assertive" aria-atomic="true">
+                                                <div class="d-flex">
+                                                    <div class="toast-body text-danger fw-bold">
+                                                        ¡Por favor ingrese un formato de imagen valido!.
+                                                    </div>
+                                                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                                </div>
+                                            </div>
+                                        </div>';
+                                }
+                                ?>
                             </div>
                                      
                             
                         </div>
                         
-                        <?php }?>
+                        
                         <div class="text-center my-3">
                             <input class="btn btn-info" type="submit" value="Actualizar"></input>
                         </div>
@@ -125,5 +132,11 @@
                 </div>
             </div>
         </div>
+        <script>
+            //Hacer visible el toast de alerta
+            var toast = document.querySelector('.toast');
+            var bootstrapToast = new bootstrap.Toast(toast);
+            bootstrapToast.show();
+        </script>        
     </body> 
 </html>

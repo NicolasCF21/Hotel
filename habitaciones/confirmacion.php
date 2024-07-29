@@ -6,9 +6,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" type="image/png" href="http://localhost/hotel/img/Logo2.png">
         <title>Pagina Hotel</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <link rel="stylesheet" href="../css/custom.css">
         <link rel="stylesheet" href="../libs/bootstrap-icons/bootstrap-icons.css">
         <script src="../js/bootstrap.min.js"></script>

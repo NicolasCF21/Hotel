@@ -1,41 +1,24 @@
 <?php
     session_start();
-    class Configuracion{
-        private $servidor;
-        private $user;
-        private $password;
-        private $status=0;
+    include '../controller/conexion.php';
+    $conexion = new Conexion();
+    $con = $conexion->conectarDB();
+    $tipo=$_POST["tipo"];
 
-        function conectarDB(){
-            $servidor = "localhost";
-            $user = "root";
-            $password = "";
-            $database = "HOTEL2";
-            $con= new mysqli($servidor, $user, $password, $database);
-            if($con->connect_error){
-                $_SESSION["ErrorDB"]="No ha sido posible la conexion con la base de datos ".$con->error;
-                header('Location: ../user/registro.php');
-            }else{
-                $status=1;
-            }
-            return $con;
+    if(!preg_match("/^[a-zA-Z ]*$/",$tipo)){
+        $_SESSION["ErrorS"]="¡Solo se permiten letras!";
+        header("Location: ../adminServicios/registrar_tipo.php");
+    }else{
+        $sql="INSERT INTO categoria_servicio (categoria_servicio)
+        VALUES('".$tipo."');";
+
+        if($con->query($sql)===TRUE){
+            $_SESSION["Registrado"]="Se ha creado el tipo de servicio correctamente";
+            header('Location: ../adminServicios/registrar_tipo.php');
+        }else{                    
+            $_SESSION["Error"]="Error creando el tipo de servicio ";
+            header('Location: ../adminServicios/registrar_tipo.php');
         }
-        function crearTipoS(){
-            $con=$this->conectarDB();
-            $sql="INSERT INTO CATEGORIA_SERVICIO (categoria_servicio)
-            VALUES('".$_POST["tipo"]."');";
-            
-            if($con->query($sql)===TRUE){
-                header('Location: ../adminServicios/registrar_tipo.php?mensaje=correcto');
-            }else{
-                $con->error;
-                header('Location: ../adminServicios/registrar_tipo.php?mensaje=error');
-            }
-            $con->close();
-        }
-        
     }
-    
-    $con = new Configuracion();
-    $con->crearTipoS();
+    $con->close();
 ?>

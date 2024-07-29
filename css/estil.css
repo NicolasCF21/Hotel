@@ -1,0 +1,79 @@
+
+.position-relative{
+    position: relative!important;
+}
+.hover-scale .hover-scale-in{
+    overflow:hidden;
+}
+
+.efecto{        
+position: relative;
+display: inline-block;
+text-decoration:none;
+}
+.z-index-1{
+    z-index:1!important;
+}
+
+.efecto::before,
+.efecto::after {
+content: '';
+position: absolute;
+width: 100%;
+left: 0;
+}
+.efecto::before {
+background-color: #115b80;
+height: 2px;
+bottom: 0;
+transform-origin: 100% 50%;
+transform: scaleX(0);
+transition: transform .3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.titulo {
+    color:#012030;
+}
+.efecto::after {
+content: attr(data-replace);
+height: 100%;
+top: 0;
+transform-origin: 100% 50%;
+transform: translate3d(200%, 0, 0);
+transition: transform .3s cubic-bezier(0.76, 0, 0.24, 1);
+color: #54b3d6;
+}
+
+.efecto:hover::before {
+transform-origin: 0% 50%;
+transform: scaleX(1);
+}
+.efecto:hover::after {
+transform: translate3d(0, 0, 0);
+}
+.mt-n4{
+    margin-top:-1.5rem;
+}
+.hover-scale-in {
+    overflow: hidden;
+    
+}
+.hover-scale-in img {
+    transition: transform .6s ease;
+}
+.hover-scale-in:hover img {
+    transform: scale(1.1);
+}
+
+.texto-cortado {        
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+}
+.texto-cortado:hover {
+    text-overflow: initial;
+    white-space: initial;
+    overflow: visible;
+    cursor: pointer;
+}

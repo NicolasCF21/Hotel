@@ -1,8 +1,11 @@
 <?php
+
     session_start();
+    error_reporting (E_ALL ^ E_NOTICE);
     include '../controller/conexion.php';
     $conexion = new Conexion();
-    $con = $conexion->conectarDB();
+    $con = $conexion->conectarDB();    
+    $idPr=$_GET["prom"];
     $id = $_GET['id'];
     $sql = "SELECT * FROM habitacion WHERE id_habitacion='".$id."'";
     $resultset = $con->query($sql);
@@ -11,9 +14,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" type="image/png" href="http://localhost/hotel/img/Logo2.png">
         <title>Pagina Hotel</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <link rel="stylesheet" href="../css/custom.css">
         <link rel="stylesheet" href="../libs/bootstrap-icons/bootstrap-icons.css">
         <script src="../js/bootstrap.min.js"></script>
@@ -21,14 +26,19 @@
     </head>
     <body>
         <?php
-        include '../modules/menu.php';
-        
+        include '../modules/menu.php';        
         ?>
         <?php 
+        if(isset($_GET['mensaje']) && $_GET['mensaje'] == 'reservada'){
+            echo '<div class="alert alert-warning m-0 alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i> La habitacion ya se encuentra reservada
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';        
+        } 
             $resulset = $con->query($sql);
                 if($fila = $resulset->fetch_assoc()){; ?>
                     <div class="container my-4">
-                        <h1 class="text-center">Habitación <?php echo $fila['nombre_habitacion'] ?></h1>
+                        <h1 class="text-center"><?php echo $fila['nombre_habitacion'] ?></h1>
                     </div>    
                     <div class="container text-center mb-5">
                         <div class="row g-4">
@@ -37,7 +47,7 @@
                             </div>
                             <div class="col-lg-5 ">
                                 <form action="reservacion.php" method="POST">
-                                    <div class="card">
+                                    <div class="card border-0 shadow bg-light">
                                         <div class="card-body">
                                             <div class="card-title">
                                                 <h4 class="text-center">Reservar Habitación</h4>
@@ -50,6 +60,7 @@
                                                                 $fechaActual =  date("Y-m-d");
                                                             ?>
                                                             <input type="hidden" name="habitacion" id="habitacion" value="<?php echo $fila['id_habitacion']?>" class="form-control" placeholder="Habitacion">                                                
+                                                            <input type="hidden" name="promocion" id="promocion" value="<?php echo $idPr?>" class="form-control" placeholder="Habitacion">                                                
                                                             <input type="date" name="ingreso" id="ingreso" class="form-control my-2" placeholder="Fecha Ingreso" required min="<?= $fechaActual?>">
                                                             <label for="ingreso">Fecha Ingreso</label>
                                                         </div>  
@@ -62,7 +73,7 @@
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-floating">
-                                                            <input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Fecha Salida" required min="1">
+                                                            <input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Fecha Salida" required min="1" max="<?php echo $fila["cantidad_personas"];?>">
                                                             <label for="cantidad">Número Personas:</label>
                                                         </div>
                                                     </div>
@@ -75,7 +86,7 @@
                                                                     <option option selected hidden value="">--Elija el tipo servicio--</option>
                                                                     <?php                                           
                                                                         $con1 = $conexion->conectarDB();
-                                                                        $sql1 = "SELECT id_servicio, nombre_servicio FROM  SERVICIO";
+                                                                        $sql1 = "SELECT id_servicio, nombre_servicio FROM  SERVICIO WHERE nombre_servicio!='Sin servicio'";
                                                                         $resulset1 = $con1->query($sql1);
                                                                         while($datos = mysqli_fetch_array($resulset1)){
                                                                     ?>                                                    
@@ -89,10 +100,8 @@
                                                         </div>
                                                     </div>
                                                 </div>                                                                                    
-                                                <div>
-                                                    
-                                                    <button type="submit" class="btn btn-sm btn-dark mt-3" name="submit" id="submit" >Reservar</button>
-                                                    <!--<a class='btn btn-sm btn-outline-dark' type='submit' name="submit" href='http://localhost/hotel/habitaciones/reservacion.php?id=<?php //echo $fila["id_habitacion"] ?>'>Reservar</a>-->
+                                                <div>                                                    
+                                                    <button type="submit" class="btn btn-sm btn-dark mt-3" name="submit" id="submit" >Reservar</button>                                                    
                                                 </div>
                                                 
                                             </div>

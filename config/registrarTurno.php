@@ -1,42 +1,16 @@
 <?php
     session_start();
-    class Configuracion{
-        private $servidor;
-        private $user;
-        private $password;
-        private $status=0;
+    include '../controller/conexion.php';
+    $conexion = new Conexion();
+    $con = $conexion->conectarDB();
+    $sql="INSERT INTO turnos_empleados (jornada,entrada,salida)
+    VALUES('".$_POST["turno"]."', '".$_POST["entrada"]."', '".$_POST["salida"]."');";
 
-        function conectarDB(){
-            $servidor = "localhost";
-            $user = "root";
-            $password = "";
-            $database = "HOTEL2";
-            $con= new mysqli($servidor, $user, $password, $database);
-            if($con->connect_error){
-                $_SESSION["ErrorDB"]="No ha sido posible la conexion con la base de datos ".$con->error;
-                header('Location: ../user/registro.php');
-            }else{
-                $status=1;
-            }
-            return $con;
-        }
-        function crearTurnos(){
-            $con=$this->conectarDB();
-            $sql="INSERT INTO turnos_empleados (jornada,entrada,salida)
-            VALUES('".$_POST["turno"]."', '".$_POST["entrada"]."', '".$_POST["salida"]."');";
-            
-            if($con->query($sql)===TRUE){
-                header('Location: ../admin_empleados/registrar_turnos.php?mensaje=registrado');
-            }else{
-                $con->error;
-                header('Location: ../admin_empleados/registrar_turnos.php?mensaje=error');
-            }
-            $con->close();
-        }
-        
+    if($con->query($sql)===TRUE){
+        header('Location: ../admin_empleados/registrar_turnos.php?mensaje=registrado');
+    }else{
+        $con->error;
+        header('Location: ../admin_empleados/registrar_turnos.php?mensaje=error');
     }
-    
-    $con = new Configuracion();
-    //$con->conectarDB();
-    $con->crearTurnos();
+    $con->close();
 ?>

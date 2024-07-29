@@ -21,10 +21,10 @@
             if($resulset->num_rows>0){
                 while($fila=$resulset->fetch_assoc()){
                     $_SESSION["Usuario"]=$fila["id_usuario"];
-                    header('Location:../user/index.php');
+                    header('Location:../user/indexU.php');
                 }
             }else{
-                $_SESSION["Error"]="Por favor verifique su credencial de acceso.!";
+                $_SESSION["Error"]="¡Credenciales de acceso incorrectos. Intente nuevamente!";
                 header('Location:../user/login.php');
             }
             

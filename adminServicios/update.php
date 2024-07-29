@@ -30,9 +30,10 @@
                 }
             }      
         } else{
-            $estado=1;
+            $estado=1;        
             $error = "Tipo de archivo no es el adecuado";
             header ("Location: actualizar.php?id=".$id."&error=" . $error . ""); 
+            return $con->error;
         }
         $sql = "UPDATE SERVICIO SET nombre_servicio='$nombre', id_categoria_servicio='$categoria', descripcion_servicio='$descripcion',
         tarifa_servicio='$tarifa', imagen_servicio='$archivo' WHERE id_servicio=$id";

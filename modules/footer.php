@@ -9,11 +9,18 @@
         <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <footer class="border-top border-2 bg-success bg-opacity-10">
+        <footer class="border-top border-2 bg-light bg-opacity-10">
             <div class="container mt-4">
             <div class="row g-4">
                 <div class="col-lg-3 col-12 justify-content-center">
-                    <img src="http://localhost/hotel/img/Logo1.png" style="max-width:200px" alt="Logo hotel">
+                    <div>
+                        <img src="http://localhost/hotel/img/Logo1.png" style="max-width:200px" alt="Logo hotel">
+                    </div>
+                    <div>
+                        <p></p>
+
+                    </div>
+                    
                     </div>
                     <div class="col-lg-3 col-6">
                     <p class="fs-5 fw-semibold">Links</p>
@@ -25,7 +32,7 @@
                             <a href="http://localhost/hotel/vistas/servicios.php" style="text-decoration:none;" class="text-dark">Servicios</a>
                         </li>
                         <li class="mb-2">
-                            <a href="#" style="text-decoration:none;" class="text-dark">Blog</a>
+                            <a href="http://localhost/hotel/vistas/reseñas.php" style="text-decoration:none;" class="text-dark">Reseñas</a>
                         </li>
                         <li class="mb-2">
                             <a href="#" style="text-decoration:none;" class="text-dark" >Contacto</a>
@@ -63,6 +70,10 @@
                         </li>
                     </ul>
                     </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="fw-semibold">Derechos reservados ©2023 Hotel Resplendor.</p>
             </div>
             </div>
         </footer>
